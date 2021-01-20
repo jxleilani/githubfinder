@@ -10,7 +10,10 @@ export class Search extends Component {
   onSubmit = e => {
     e.preventDefault();
     //take the text that's submitted and call API to search for a user
-    
+    //pass this.state.text up to App.js
+    this.props.searchUsers(this.state.text);
+    //reset input field to nothing
+    this.setState({ text: '' });
   }
 
   render() {
