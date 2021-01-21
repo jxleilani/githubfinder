@@ -10,17 +10,23 @@ export class Search extends Component {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = (e) => {
     e.preventDefault();
-    //take the text that's submitted and call API to search for a user
-    //pass this.state.text up to App.js
-    this.props.searchUsers(this.state.text);
-    //reset input field to nothing
-    this.setState({ text: "" });
+    //if search text is blank, set alert
+    if (this.state.text === "") {
+      this.props.setAlert("Please enter something", "light");
+    } else {
+      //take the text that's submitted and call API to search for a user
+      //pass this.state.text up to App.js
+      this.props.searchUsers(this.state.text);
+      //reset input field to nothing
+      this.setState({ text: "" });
+    }
   };
 
   render() {
@@ -43,10 +49,7 @@ export class Search extends Component {
           <div className="test"></div>
         </form>
         {showClear && (
-          <button
-            className="btn btn-light btn-block"
-            onClick={clearUsers}
-          >
+          <button className="btn btn-light btn-block" onClick={clearUsers}>
             Clear
           </button>
         )}
