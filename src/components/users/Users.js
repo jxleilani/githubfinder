@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import UserItem from "./UserItem";
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
+import GithubContext from "../../context/github/githubContext";
 
 const Users = ({ users, loading }) => {
+  const githubContext = useContext(GithubContext);
   //if API loading, show the spinner, else return the users
   if(loading){
     return <Spinner />
